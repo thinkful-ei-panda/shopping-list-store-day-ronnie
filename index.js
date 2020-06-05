@@ -26,6 +26,9 @@ const generateItemElement = function (item) {
         <button class='shopping-item-delete js-item-delete'>
           <span class='button-label'>delete</span>
         </button>
+        <button class='shopping-item-edit js-item-edit'>
+          <span class='button-label'>edit</span>
+        </button>
       </div>
     </li>`;
 };
@@ -112,7 +115,34 @@ const deleteListItem = function (id) {
   // the list item we want to remove, with 
   // a removeCount of 1.
   store.items.splice(index, 1);
+
 };
+const editItem = function (id){
+  const index = store.items.findIndex(item => item.id === id);
+  store.items.replace(index, 1);
+}
+
+function handleEdit(){
+      $('.js-shopping-list').on('click', '.js-item-edit', event =>{
+        
+      $('.js-item-edit').blur(function() {
+        if ($.trim(this.value) == ''){
+      this.value = (this.defaultValue ? this.defaultValue : '');
+      }
+      else{
+      $(this).prev().prev().html(this.value);
+      }
+
+      $(this).hide();
+      $(this).prev().show();
+      $(this).prev().prev().show();
+      
+    });
+     
+      
+      
+    })
+  }
 
 const handleDeleteItemClicked = function () {
   // Like in `handleItemCheckClicked`, 
